@@ -1,0 +1,189 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivityFragment"
+    android:id="@+id/profile_frame_layout">
+
+    <ScrollView
+        android:id="@+id/profile_scroll_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#ffffff">
+
+            <LinearLayout
+                style="@style/profile_setting_subLinearLayout"
+                android:id="@+id/profile_setting_linear_layout_photo">
+
+                <TextView
+                    style="@style/profile_setting_left_text_field_names"
+                    android:text="@string/profile_photo" />
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+
+                    android:id="@+id/profile_setting_profile_image"
+                    />
+
+            </LinearLayout>
+
+            <View style="@style/SectionDiver"/>
+
+            <LinearLayout
+                style="@style/profile_setting_subLinearLayout"
+                android:id="@+id/profile_setting_linear_layout_firstname">
+
+                <TextView
+                    style="@style/profile_setting_left_text_field_names"
+                    android:text="@string/first_name"/>
+
+                <TextView
+                   style="@style/profile_setting_right_text"
+                    android:text="@string/first_name"
+                    android:id="@+id/profile_text_view_first_name"/>
+                
+                <ImageView
+                    style="@style/profile_setting_right_edit_image_icon" />
+
+
+            </LinearLayout>
+
+            <View style="@style/Divider"/>
+
+            <LinearLayout
+                style="@style/profile_setting_subLinearLayout"
+                android:id="@+id/profile_setting_linear_layout_lastname">
+
+                <TextView
+                    style="@style/profile_setting_left_text_field_names"
+                    android:text="@string/last_name" />
+
+                <TextView
+                    style="@style/profile_setting_right_text"
+                    android:text="@string/last_name"
+                    android:id="@+id/profile_text_view_last_name"/>
+
+                <ImageView
+                    style="@style/profile_setting_right_edit_image_icon" />
+
+
+            </LinearLayout>
+
+            <View style="@style/Divider"/>
+
+            <LinearLayout
+                style="@style/profile_setting_subLinearLayout"
+                android:id="@+id/profile_setting_linear_layout_gender">
+
+                <TextView
+                    style="@style/profile_setting_left_text_field_names"
+                    android:text="@string/gender"/>
+
+                <TextView
+                    style="@style/profile_setting_right_text"
+                    android:text="@string/male"
+                    android:id="@+id/profile_text_view_gender"/>
+
+                <ImageView
+                    style="@style/profile_setting_right_edit_image_icon" />
+
+            </LinearLayout>
+
+            <View style="@style/Divider"/>
+
+            <LinearLayout
+                style="@style/profile_setting_subLinearLayout"
+                android:id="@+id/profile_setting_linear_layout_birth">
+
+                <TextView
+                    style="@style/profile_setting_left_text_field_names"
+                    android:text="@string/birth"/>
+
+                <TextView
+                    style="@style/profile_setting_right_text"
+                    android:text="@string/birthday"
+                    android:id="@+id/profile_text_view_birth"/>
+
+                <ImageView
+                    style="@style/profile_setting_right_edit_image_icon" />
+
+            </LinearLayout>
+
+            <View style="@style/SectionDiver"/>
+
+            <LinearLayout
+                style="@style/profile_setting_subLinearLayout"
+                android:id="@+id/profile_setting_linear_layout_edition">
+
+                <TextView
+                    style="@style/profile_setting_left_text_field_names"
+                    android:text="@string/edition"/>
+
+                <TextView
+                    style="@style/profile_setting_right_text"
+                    android:text="@string/au"
+                    android:id="@+id/profile_text_view_edition"/>
+
+                <ImageView
+                    style="@style/profile_setting_right_edit_image_icon" />
+
+            </LinearLayout>
+
+            <View style="@style/SectionDiver"/>
+
+            <LinearLayout
+                style="@style/profile_setting_subLinearLayout"
+                android:id="@+id/profile_setting_linear_layout_interesting_topic">
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:padding="@dimen/profile_setting_text_padding"
+                    android:layout_weight="1"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:text="@string/interesting_topic"
+                    />
+                <HorizontalScrollView
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:scrollbars="none"
+                    android:id="@+id/profile_scroll_view_topic">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:textSize="15dp"
+                        android:padding="@dimen/profile_setting_text_padding"
+                        android:textStyle="italic"
+                        android:id="@+id/profile_text_view_topic"
+                        android:maxLines="1"
+                        />
+                </HorizontalScrollView>
+
+
+                <ImageView
+                    style="@style/profile_setting_right_edit_image_icon" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

@@ -1,0 +1,11 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="profile_setting_field_name_text_size">15dp</dimen>
+    <dimen name="profile_setting_text_padding">10dp</dimen>
+    <dimen name="profile_setting_profile_edit_icon_width">20dp</dimen>
+    <dimen name="profile_setting_profile_edit_icon_height">30dp</dimen>
+
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_editions">
+        <item>US</item>
+        <item>AU</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="pref_topics">
+        <item>top</item>
+        <item>world</item>
+        <item>nation</item>
+        <item>business</item>
+        <item>technology</item>
+        <item>entertainment</item>
+        <item>sports</item>
+        <item>science</item>
+        <item>health</item>
+        <item>spotlight</item>
+    </string-array>
+
+    <string-array name="photo">
+        <item>Take Photo</item>
+        <item>Select From Library</item>
+    </string-array>
+
+    <string-array name="empty_array"/>
+</resources>
