@@ -41,16 +41,15 @@
 
             <LinearLayout
                 style="@style/profile_setting_subLinearLayout"
-                android:id="@+id/profile_setting_linear_layout_firstname">
+                android:id="@+id/profile_setting_linear_layout_name">
 
                 <TextView
                     style="@style/profile_setting_left_text_field_names"
-                    android:text="@string/first_name"/>
+                    android:text="@string/name"/>
 
                 <TextView
                    style="@style/profile_setting_right_text"
-                    android:text="@string/first_name"
-                    android:id="@+id/profile_text_view_first_name"/>
+                    android:id="@+id/profile_text_view_name"/>
                 
                 <ImageView
                     style="@style/profile_setting_right_edit_image_icon" />
@@ -58,26 +57,6 @@
 
             </LinearLayout>
 
-            <View style="@style/Divider"/>
-
-            <LinearLayout
-                style="@style/profile_setting_subLinearLayout"
-                android:id="@+id/profile_setting_linear_layout_lastname">
-
-                <TextView
-                    style="@style/profile_setting_left_text_field_names"
-                    android:text="@string/last_name" />
-
-                <TextView
-                    style="@style/profile_setting_right_text"
-                    android:text="@string/last_name"
-                    android:id="@+id/profile_text_view_last_name"/>
-
-                <ImageView
-                    style="@style/profile_setting_right_edit_image_icon" />
-
-
-            </LinearLayout>
 
             <View style="@style/Divider"/>
 
@@ -91,7 +70,6 @@
 
                 <TextView
                     style="@style/profile_setting_right_text"
-                    android:text="@string/male"
                     android:id="@+id/profile_text_view_gender"/>
 
                 <ImageView
@@ -111,7 +89,6 @@
 
                 <TextView
                     style="@style/profile_setting_right_text"
-                    android:text="@string/birthday"
                     android:id="@+id/profile_text_view_birth"/>
 
                 <ImageView
@@ -131,7 +108,6 @@
 
                 <TextView
                     style="@style/profile_setting_right_text"
-                    android:text="@string/au"
                     android:id="@+id/profile_text_view_edition"/>
 
                 <ImageView

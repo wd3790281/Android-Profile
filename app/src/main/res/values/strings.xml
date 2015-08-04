@@ -3,8 +3,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="profile_photo">Photo</string>
-    <string name="first_name">First Name</string>
-    <string name="last_name">Last Name</string>
+    <string name="name">Name</string>
     <string name="edition">Edition</string>
     <string name="interesting_topic">Interesting Topic</string>
     <string name="gender">Gender</string>

@@ -38,14 +38,13 @@ import java.util.Date;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment implements TextEditDialogFragment.OnTextDialogListener,
-        MultiChoiceFragment.OnMultiChoiceListener, SingleChoiceFragment.OnSingleChoiceListener, ListDialogFragment.OnListDialogListener,
+        MultiChoiceFragment.OnMultiChoiceListener,  ListDialogFragment.OnListDialogListener,
 DatePickFragment.OnDatePickListener{
 
     public static final String LOG_TAG = MainActivityFragment.class.getSimpleName();
 
     private LinearLayout mLinearLayoutPhoto;
-    private LinearLayout mLinearLayoutFirstName;
-    private LinearLayout mLinearLayoutLastName;
+    private LinearLayout mLinearLayoutName;
     private LinearLayout mLinearLayoutGender;
     private LinearLayout mLinearLayoutEdition;
     private LinearLayout mLinearLayoutIntersetingTopic;
@@ -54,13 +53,11 @@ DatePickFragment.OnDatePickListener{
     private TextView mTextView;
     private String[] mSingleChoice;
     private ImageView mImageView;
-    private TextView mFirstNameText;
-    private TextView mLastNameText;
+    private TextView mNameText;
     private TextView mEditionText;
     private TextView mGenderText;
     private TextView mBirthText;
     private TextView mTopicText;
-    private Date mDate;
     private SharedPreferences mPreference;
     private SharedPreferences.Editor mPreferenceEd;
     private Bitmap mPhoto;
@@ -79,22 +76,21 @@ DatePickFragment.OnDatePickListener{
         mPreferenceEd = mPreference.edit();
 
         mLinearLayoutPhoto = (LinearLayout) rootView.findViewById(R.id.profile_setting_linear_layout_photo);
-        mLinearLayoutFirstName = (LinearLayout) rootView.findViewById(R.id.profile_setting_linear_layout_firstname);
-        mLinearLayoutLastName = (LinearLayout) rootView.findViewById(R.id.profile_setting_linear_layout_lastname);
+        mLinearLayoutName = (LinearLayout) rootView.findViewById(R.id.profile_setting_linear_layout_name);
         mLinearLayoutGender = (LinearLayout) rootView.findViewById(R.id.profile_setting_linear_layout_gender);
         mLinearLayoutBirth = (LinearLayout) rootView.findViewById(R.id.profile_setting_linear_layout_birth);
         mLinearLayoutEdition = (LinearLayout) rootView.findViewById(R.id.profile_setting_linear_layout_edition);
         mLinearLayoutIntersetingTopic = (LinearLayout) rootView.findViewById((R.id.profile_setting_linear_layout_interesting_topic));
 
 
-        mFirstNameText = (TextView) rootView.findViewById(R.id.profile_text_view_first_name);
-        mLastNameText = (TextView) rootView.findViewById(R.id.profile_text_view_last_name);
+        mNameText = (TextView) rootView.findViewById(R.id.profile_text_view_name);
         mEditionText = (TextView) rootView.findViewById(R.id.profile_text_view_edition);
         mGenderText = (TextView) rootView.findViewById(R.id.profile_text_view_gender);
         mBirthText = (TextView) rootView.findViewById(R.id.profile_text_view_birth);
         mTopicText = (TextView) rootView.findViewById(R.id.profile_text_view_topic);
 
         String imageCode = mPreference.getString("encoded image", null);
+
         mImageView = (ImageView) rootView.findViewById(R.id.profile_setting_profile_image);
         if (imageCode == null){
             mImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_picture));
@@ -105,11 +101,8 @@ DatePickFragment.OnDatePickListener{
             mImageView.setImageBitmap(mPhoto);
 
         }
-        String firstName = mPreference.getString("first name", "First Name");
-        mFirstNameText.setText(firstName);
-
-        String lastName = mPreference.getString("last name", "Last Name");
-        mLastNameText.setText(lastName);
+        String firstName = mPreference.getString("name", "Name");
+        mNameText.setText(firstName);
 
         String edition = mPreference.getString("edition", "AU");
         mEditionText.setText(edition);
@@ -125,9 +118,6 @@ DatePickFragment.OnDatePickListener{
             mItemsName.add("");
         }
         mTopicText.setText(topic);
-//        mTopicText.setMovementMethod(new ScrollingMovementMethod());
-
-
 
         mLinearLayoutPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,18 +125,10 @@ DatePickFragment.OnDatePickListener{
                 pickFromList(mLinearLayoutPhoto,R.array.photo);
             }
         });
-        mLinearLayoutFirstName.setOnClickListener(new View.OnClickListener() {
+        mLinearLayoutName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences = getActivity().getSharedPreferences("fragment name", 0);
-                editName(mLinearLayoutFirstName, R.id.profile_setting_linear_layout_firstname);
-            }
-        });
-
-        mLinearLayoutLastName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editName(mLinearLayoutLastName, R.id.profile_setting_linear_layout_lastname);
+                editName(mLinearLayoutName, R.id.profile_setting_linear_layout_name);
             }
         });
 
@@ -224,11 +206,8 @@ DatePickFragment.OnDatePickListener{
 
         if(which == DialogInterface.BUTTON_POSITIVE) {
             mTextView.setText(data);
-            if (layoutID == R.id.profile_setting_linear_layout_firstname) {
-                mPreferenceEd.putString("first name", data);
-                mPreferenceEd.commit();
-            } else if (layoutID == R.id.profile_setting_linear_layout_lastname) {
-                mPreferenceEd.putString("last name", data);
+            if (layoutID == R.id.profile_setting_linear_layout_name) {
+                mPreferenceEd.putString("name", data);
                 mPreferenceEd.commit();
             }
         }
@@ -237,18 +216,13 @@ DatePickFragment.OnDatePickListener{
     }
 
     public void editName(LinearLayout layout, final int resourceID){
-        LayoutInflater inflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if(resourceID == R.id.profile_setting_linear_layout_firstname) {
+        if(resourceID == R.id.profile_setting_linear_layout_name) {
 
-            mTextView = (TextView) layout.findViewById(R.id.profile_text_view_first_name);
-            DialogFragment dialog = TextEditDialogFragment.newInstance(MainActivityFragment.this, R.id.profile_setting_linear_layout_firstname, R.string.first_name, R.string.ok, R.string.cancel);
+            mTextView = (TextView) layout.findViewById(R.id.profile_text_view_name);
+            DialogFragment dialog = TextEditDialogFragment.newInstance(MainActivityFragment.this, R.id.profile_setting_linear_layout_name, R.string.name, R.string.ok, R.string.cancel);
             dialog.show(getFragmentManager(), "Edit First Name");
 
-        } else if(resourceID == R.id.profile_setting_linear_layout_lastname) {
-            mTextView = (TextView) layout.findViewById(R.id.profile_text_view_last_name);
-            DialogFragment dialog = TextEditDialogFragment.newInstance(MainActivityFragment.this, R.id.profile_setting_linear_layout_lastname, R.string.last_name, R.string.ok, R.string.cancel);
-            dialog.show(getFragmentManager(), "Edit Last Name");
         }
     }
 
@@ -268,46 +242,8 @@ DatePickFragment.OnDatePickListener{
         dialog.dismiss();
     }
 
-    public void singleChoice(LinearLayout layout, int array) {
-        LayoutInflater inflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        if(array == R.array.gender) {
-
-            mSingleChoice = getResources().getStringArray(R.array.gender);
-            mTextView = (TextView) layout.findViewById(R.id.profile_text_view_gender);
-            DialogFragment dialog = SingleChoiceFragment.newInstance(MainActivityFragment.this, R.id.profile_setting_linear_layout_gender, R.string.gender, R.array.gender, R.string.ok, R.string.cancel);
-            dialog.show(getFragmentManager(), "Choose Gender");
-
-        }else if(array == R.array.pref_editions) {
-
-            mSingleChoice = getResources().getStringArray(R.array.pref_editions);
-            mTextView = (TextView) layout.findViewById(R.id.profile_text_view_edition);
-            DialogFragment dialog = SingleChoiceFragment.newInstance(MainActivityFragment.this, R.id.profile_setting_linear_layout_edition, R.string.edition, R.array.pref_editions, R.string.ok,R.string.cancel);
-            dialog.show(getFragmentManager(), "Choose Edition");
-
-        }
-    }
-
-
-    @Override
-    public void onSingleChoiceButtonClick(DialogFragment dialog,int layoutID, int which, int data) {
-        if (which == DialogInterface.BUTTON_POSITIVE) {
-            String text = mSingleChoice[data];
-            mTextView.setText(text);
-            if (layoutID == R.id.profile_setting_linear_layout_gender) {
-                mPreferenceEd.putString("gender", text);
-                mPreferenceEd.commit();
-            } else if (layoutID == R.id.profile_setting_linear_layout_edition) {
-                mPreferenceEd.putString("edition", text);
-                mPreferenceEd.commit();
-            }
-
-        }
-        dialog.dismiss();
-    }
 
     public void pickFromList(LinearLayout layout, int array){
-        LayoutInflater inflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if(array == R.array.photo){
 
