@@ -38,7 +38,7 @@ public class TextEditDialogFragment extends DialogFragment implements DialogInte
     }
 
 
-    public static TextEditDialogFragment newInstance(Fragment fragment, int layoutID, int title,  int positiveButton, int negativeButton) {
+    public static TextEditDialogFragment newInstance(Fragment fragment, int layoutID, String name, int title,  int positiveButton, int negativeButton) {
 
         TextEditDialogFragment dialogFragment = new TextEditDialogFragment();
 
@@ -48,6 +48,7 @@ public class TextEditDialogFragment extends DialogFragment implements DialogInte
         args.putInt("positive", positiveButton);
         args.putInt("negative", negativeButton);
         args.putInt("layoutID", layoutID);
+        args.putString("name", name);
 
         dialogFragment.setArguments(args);
         dialogFragment.setTargetFragment(fragment, 0);
@@ -69,10 +70,14 @@ public class TextEditDialogFragment extends DialogFragment implements DialogInte
 
         mEditText= (EditText) rootView.findViewById(R.id.edit_context);
 
+
         int title = bundle.getInt("title");
         int positiveButton = bundle.getInt("positive");
         int negativeButton = bundle.getInt("negative");
+        String name = bundle.getString("name");
         mLayoutID = bundle.getInt("layoutID");
+
+        mEditText.setText(name);
 
         if(title != 0)
             builder.setTitle(title);

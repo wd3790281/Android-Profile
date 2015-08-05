@@ -8,7 +8,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 
-public class SingleChoiceFragment extends DialogFragment implements DialogInterface.OnClickListener{
+public class SingleChoiceDialogFragment extends DialogFragment implements DialogInterface.OnClickListener{
 
     int mSelectedItem;
     int mLayoutID;
@@ -17,9 +17,9 @@ public class SingleChoiceFragment extends DialogFragment implements DialogInterf
         void onSingleChoiceButtonClick(DialogFragment dialog, int layoutID, int which, int data);
     }
 
-    public static SingleChoiceFragment newInstance(Fragment fragment, int layoutID, int title, int list, int positiveButton, int negativeButton) {
+    public static SingleChoiceDialogFragment newInstance(Fragment fragment, int layoutID, int title, int list, int positiveButton, int negativeButton) {
 
-        SingleChoiceFragment dialogFragment = new SingleChoiceFragment();
+        SingleChoiceDialogFragment dialogFragment = new SingleChoiceDialogFragment();
 
         Bundle args = new Bundle();
 

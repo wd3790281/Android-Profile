@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class DatePickFragment extends DialogFragment implements DialogInterface.OnClickListener {
+public class DatePickDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
 
     public interface OnDatePickListener {
         void onDatePickButtonClick(DialogFragment dialog, int year, int month, int day);
@@ -20,9 +20,9 @@ public class DatePickFragment extends DialogFragment implements DialogInterface.
 
     OnDatePickListener mListener;
 
-    public static DatePickFragment newInstance(Fragment fragment, int title, Date date, int positiveButton, int negativeButton) {
+    public static DatePickDialogFragment newInstance(Fragment fragment, int title, Date date, int positiveButton, int negativeButton) {
 
-        DatePickFragment dialogFragment = new DatePickFragment();
+        DatePickDialogFragment dialogFragment = new DatePickDialogFragment();
 
         Bundle args = new Bundle();
         args.putInt("title", title);
@@ -46,9 +46,6 @@ public class DatePickFragment extends DialogFragment implements DialogInterface.
 
         Bundle bundle = getArguments();
         mDate = (Date) bundle.getSerializable("date");
-        int title = bundle.getInt("title");
-        int positiveButton = bundle.getInt("positiveButton");
-        int negativeButton = bundle.getInt("negativeButton");
 
         final Calendar calendar = Calendar.getInstance();
 
@@ -64,7 +61,7 @@ public class DatePickFragment extends DialogFragment implements DialogInterface.
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                 mListener = (OnDatePickListener) getTargetFragment();
-                mListener.onDatePickButtonClick(DatePickFragment.this, year, monthOfYear, dayOfMonth);
+                mListener.onDatePickButtonClick(DatePickDialogFragment.this, year, monthOfYear, dayOfMonth);
 
             }
         },year, month, day);

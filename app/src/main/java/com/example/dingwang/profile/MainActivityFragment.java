@@ -38,8 +38,8 @@ import java.util.Date;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment implements TextEditDialogFragment.OnTextDialogListener,
-        MultiChoiceFragment.OnMultiChoiceListener,  ListDialogFragment.OnListDialogListener,
-DatePickFragment.OnDatePickListener{
+        MultiChoiceDialogFragment.OnMultiChoiceListener,  ListDialogFragment.OnListDialogListener,
+DatePickDialogFragment.OnDatePickListener{
 
     public static final String LOG_TAG = MainActivityFragment.class.getSimpleName();
 
@@ -101,8 +101,8 @@ DatePickFragment.OnDatePickListener{
             mImageView.setImageBitmap(mPhoto);
 
         }
-        String firstName = mPreference.getString("name", "Name");
-        mNameText.setText(firstName);
+        final String name = mPreference.getString("name", "Name");
+        mNameText.setText(name);
 
         String edition = mPreference.getString("edition", "AU");
         mEditionText.setText(edition);
@@ -128,7 +128,7 @@ DatePickFragment.OnDatePickListener{
         mLinearLayoutName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editName(mLinearLayoutName, R.id.profile_setting_linear_layout_name);
+                editName(mLinearLayoutName, name, R.id.profile_setting_linear_layout_name);
             }
         });
 
@@ -144,7 +144,7 @@ DatePickFragment.OnDatePickListener{
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
                 Date date = calendar.getTime();
-                DialogFragment dialog = DatePickFragment.newInstance(MainActivityFragment.this, R.string.birthday, date, R.string.ok, R.string.cancel);
+                DialogFragment dialog = DatePickDialogFragment.newInstance(MainActivityFragment.this, R.string.birthday, date, R.string.ok, R.string.cancel);
                 dialog.show(getFragmentManager(), "Date Picker");
                 mTextView = (TextView) rootView.findViewById(R.id.profile_text_view_birth);
             }
@@ -198,7 +198,7 @@ DatePickFragment.OnDatePickListener{
         }
         ArrayList<String>  itemsName = mItemsName;
 
-        DialogFragment dialog = MultiChoiceFragment.newInstance(MainActivityFragment.this,R.array.pref_topics, items, itemsName, R.string.interesting_topic, R.string.ok, R.string.cancel);
+        DialogFragment dialog = MultiChoiceDialogFragment.newInstance(MainActivityFragment.this, R.array.pref_topics, items, itemsName, R.string.interesting_topic, R.string.ok, R.string.cancel);
         dialog.show(getFragmentManager(), "Pick Interesting Topic");
     }
     @Override
@@ -215,12 +215,12 @@ DatePickFragment.OnDatePickListener{
 
     }
 
-    public void editName(LinearLayout layout, final int resourceID){
+    public void editName(LinearLayout layout, String name, final int resourceID){
 
         if(resourceID == R.id.profile_setting_linear_layout_name) {
 
             mTextView = (TextView) layout.findViewById(R.id.profile_text_view_name);
-            DialogFragment dialog = TextEditDialogFragment.newInstance(MainActivityFragment.this, R.id.profile_setting_linear_layout_name, R.string.name, R.string.ok, R.string.cancel);
+            DialogFragment dialog = TextEditDialogFragment.newInstance(MainActivityFragment.this, R.id.profile_setting_linear_layout_name, name, R.string.name, R.string.ok, R.string.cancel);
             dialog.show(getFragmentManager(), "Edit First Name");
 
         }
@@ -322,7 +322,12 @@ DatePickFragment.OnDatePickListener{
     public void onDatePickButtonClick(DialogFragment dialog, int year, int month, int day ) {
 
         String date = "";
-        date = "" + day + "/" + month + "/" + year;
+        month = month + 1;
+        if (month < 10) {
+            date = "" + day + "/" + "0" + month + "/" + year;
+        }else {
+            date = "" + day + "/" + month + "/" + year;
+        }
         mTextView.setText(date);
         mPreferenceEd.putString("date time", date);
         mPreferenceEd.commit();

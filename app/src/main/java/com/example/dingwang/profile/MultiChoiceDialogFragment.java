@@ -10,7 +10,7 @@ import android.os.Bundle;
 import java.util.ArrayList;
 
 
-public class MultiChoiceFragment extends DialogFragment implements DialogInterface.OnClickListener {
+public class MultiChoiceDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
     ArrayList<Boolean> mSelectedItems = new ArrayList(30);
     ArrayList<String> mSelcetedItemString = new ArrayList();
 
@@ -18,9 +18,9 @@ public class MultiChoiceFragment extends DialogFragment implements DialogInterfa
         void onMultiButtonClick(DialogFragment dialog, int which, ArrayList data, ArrayList<String> dataString);
     }
 
-    public static MultiChoiceFragment newInstance(Fragment fragment,int arrayID, boolean[] defaultItem, ArrayList<String> itemsName, int title, int positiveButton, int negativeButton) {
+    public static MultiChoiceDialogFragment newInstance(Fragment fragment,int arrayID, boolean[] defaultItem, ArrayList<String> itemsName, int title, int positiveButton, int negativeButton) {
 
-        MultiChoiceFragment dialogFragment = new MultiChoiceFragment();
+        MultiChoiceDialogFragment dialogFragment = new MultiChoiceDialogFragment();
 
         Bundle args = new Bundle();
 
