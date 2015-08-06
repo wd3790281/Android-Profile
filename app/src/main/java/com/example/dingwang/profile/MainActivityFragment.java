@@ -110,7 +110,7 @@ DatePickDialogFragment.OnDatePickListener{
         String gender = mPreference.getString("gender", "Male");
         mGenderText.setText(gender);
 
-        String birth = mPreference.getString("date time", "Birthday");
+        String birth = mPreference.getString("date", "Birthday");
         mBirthText.setText(birth);
 
         String topic = mPreference.getString("topic name", "Please Select");
@@ -142,8 +142,14 @@ DatePickDialogFragment.OnDatePickListener{
         mLinearLayoutBirth.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                Date date = calendar.getTime();
+
+                Long dateLong = mPreference.getLong("date time", 0);
+                Date date = null;
+                if (dateLong == 0){
+                    date = null;
+                }else {
+                    date = new Date(dateLong);
+                }
                 DialogFragment dialog = DatePickDialogFragment.newInstance(MainActivityFragment.this, R.string.birthday, date, R.string.ok, R.string.cancel);
                 dialog.show(getFragmentManager(), "Date Picker");
                 mTextView = (TextView) rootView.findViewById(R.id.profile_text_view_birth);
@@ -219,9 +225,10 @@ DatePickDialogFragment.OnDatePickListener{
 
         if(resourceID == R.id.profile_setting_linear_layout_name) {
 
+            name = mPreference.getString("name", "Name");
             mTextView = (TextView) layout.findViewById(R.id.profile_text_view_name);
             DialogFragment dialog = TextEditDialogFragment.newInstance(MainActivityFragment.this, R.id.profile_setting_linear_layout_name, name, R.string.name, R.string.ok, R.string.cancel);
-            dialog.show(getFragmentManager(), "Edit First Name");
+            dialog.show(getFragmentManager(), "Edit Name");
 
         }
     }
@@ -321,20 +328,26 @@ DatePickDialogFragment.OnDatePickListener{
     @Override
     public void onDatePickButtonClick(DialogFragment dialog, int year, int month, int day ) {
 
-        String date = "";
-        month = month + 1;
-        if (month < 10) {
-            date = "" + day + "/" + "0" + month + "/" + year;
+        String dateString = "";
+        int revealMonth = month + 1;
+        if (day < 10){
+            dateString = "" + "0" + day;
         }else {
-            date = "" + day + "/" + month + "/" + year;
+            dateString = "" + day;
         }
-        mTextView.setText(date);
-        mPreferenceEd.putString("date time", date);
+        if (month < 10) {
+            dateString = dateString + "/" + "0" + revealMonth + "/" + year;
+        }else {
+            dateString = dateString + "/" + revealMonth + "/" + year;
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        mTextView.setText(dateString);
+        mPreferenceEd.putString("date", dateString);
+        mPreferenceEd.putLong("date time", calendar.getTimeInMillis());
         mPreferenceEd.commit();
         dialog.dismiss();
     }
-
-    private Boolean mPhotoChanged = false;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

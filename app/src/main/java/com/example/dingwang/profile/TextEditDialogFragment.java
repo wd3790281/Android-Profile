@@ -78,6 +78,9 @@ public class TextEditDialogFragment extends DialogFragment implements DialogInte
         mLayoutID = bundle.getInt("layoutID");
 
         mEditText.setText(name);
+        mEditText.setMaxLines(1);
+        mEditText.setSingleLine(true);
+        mEditText.setSelection(name.length());
 
         if(title != 0)
             builder.setTitle(title);

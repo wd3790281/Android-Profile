@@ -35,7 +35,7 @@ public class DatePickDialogFragment extends DialogFragment implements DialogInte
         return dialogFragment;
     }
 
-    Date mDate = new Date(System.currentTimeMillis());
+    Date mDate = new Date();
     int mYear;
     int mMonth;
     int mDay;
@@ -45,15 +45,28 @@ public class DatePickDialogFragment extends DialogFragment implements DialogInte
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         Bundle bundle = getArguments();
-        mDate = (Date) bundle.getSerializable("date");
+
 
         final Calendar calendar = Calendar.getInstance();
 
+        int year = 0;
+        int month = 0;
+        int day = 0;
 
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        if (bundle.getSerializable("date") == null) {
 
+            mDate = new Date(System.currentTimeMillis());
+
+        }else{
+
+            mDate = (Date) bundle.getSerializable("date");
+            mDate.getTime();
+
+        }
+        calendar.setTime(mDate);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
 
 
          final DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {

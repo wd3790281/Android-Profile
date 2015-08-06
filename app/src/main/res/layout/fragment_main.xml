@@ -130,6 +130,7 @@
                     android:layout_weight="1"
                     android:textSize="15dp"
                     android:textStyle="bold"
+                    android:textColor="#000000"
                     android:text="@string/interesting_topic"
                     />
                 <HorizontalScrollView
@@ -147,6 +148,7 @@
                         android:textSize="15dp"
                         android:padding="@dimen/profile_setting_text_padding"
                         android:textStyle="italic"
+                        android:textColor="#000000"
                         android:id="@+id/profile_text_view_topic"
                         android:maxLines="1"
                         />
